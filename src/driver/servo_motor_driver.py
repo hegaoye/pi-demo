@@ -2,7 +2,6 @@
 # coding=utf-8
 import atexit
 import time
-
 import RPi.GPIO as GPIO
 
 
