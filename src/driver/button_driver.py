@@ -26,13 +26,16 @@ class ButtonDriver(object):
 if __name__ == '__main__':
     button = ButtonDriver(26)
     relay = RelayDriver(25)
+    led = RelayDriver(17)
     while True:
         button_status = button.read()
         print(button_status)
         if button_status == GPIO.LOW:
             relay.off()
+            led.off()
         elif button_status == GPIO.HIGH:
             relay.on()
+            led.on()
         else:
             print("error")
 
