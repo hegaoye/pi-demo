@@ -1,17 +1,17 @@
 from flask import Blueprint
 
-from src.driver.switch_driver import SwitchDriver
+from src.driver.relay_driver import RelayDriver
 
 openapi = Blueprint('openapi', __name__)
 
 
-@openapi.route("/switch/on")
+@openapi.route("/relay/on")
 def on():
-    SwitchDriver(25).on()
+    RelayDriver(25).on()
     return ("pin 25 on")
 
 
-@openapi.route("/switch/off")
+@openapi.route("/relay/off")
 def off():
-    SwitchDriver(25).off()
+    RelayDriver(25).off()
     return "pin 25 off"

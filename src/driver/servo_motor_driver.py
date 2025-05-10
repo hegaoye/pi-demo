@@ -7,6 +7,10 @@ import RPi.GPIO as GPIO
 
 
 class ServoMotorDriver(object):
+    """
+    舵机驱动
+    """
+
     def __init__(self):
         atexit.register(GPIO.cleanup)
         GPIO.setmode(GPIO.BCM)
@@ -14,9 +18,9 @@ class ServoMotorDriver(object):
         self.p = GPIO.PWM(14, 50)
 
     def openLock(self):
-        '''
+        """
         开锁控制
-        '''
+        """
 
         self.p.start(0)
         time.sleep(0.02)
@@ -28,9 +32,9 @@ class ServoMotorDriver(object):
         self.lock()
 
     def lock(self):
-        '''
+        """
         锁定锁控制
-        '''
+        """
         self.p.start(0)
         time.sleep(0.02)
         self.p.ChangeDutyCycle(15)
