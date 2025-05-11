@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify
 from src.config.status_enum import Status
+from src.driver.relay_driver import RelayDriver
 
 # from src.driver.relay_driver import RelayDriver
 
@@ -40,10 +41,10 @@ def on(onoff):
     """
 
     if onoff == str(Status.On).lower():
-        # RelayDriver(25).on()
+        RelayDriver(25).on()
         info = "on"
     elif onoff == str(Status.Off).lower():
-        # RelayDriver(25).off()
+        RelayDriver(25).off()
         info = "off"
 
     return jsonify({"code": "0000", "info": "123"})
