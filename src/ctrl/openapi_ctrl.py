@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify
+
 from src.config.status_enum import Status
 from src.driver.relay_driver import RelayDriver
-
-# from src.driver.relay_driver import RelayDriver
 
 openapi = Blueprint('openapi', __name__)
 
