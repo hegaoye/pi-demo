@@ -30,7 +30,7 @@ def on(onoff):
             code:
               type: string
               description: 状态码
-              default: 0000
+              default: "0000"
     """
 
     if onoff == str(Status.On).lower():
