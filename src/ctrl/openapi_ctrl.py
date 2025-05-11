@@ -21,22 +21,16 @@ def on(onoff):
         description: 开 on , 关 off
     responses:
       500:
-        description: Error The language is not awesome!
+        description: 指令错误
       200:
-        description: A language with its awesomeness
+        description: 指令执行成功
         schema:
-          id: awesome
+          id: R
           properties:
-            language:
+            code:
               type: string
-              description: The language name
-              default: Lua
-            features:
-              type: array
-              description: The awesomeness list
-              items:
-                type: string
-              default: ["perfect", "simple", "lovely"]
+              description: 状态码
+              default: 0000
     """
 
     if onoff == str(Status.On).lower():
