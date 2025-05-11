@@ -14,4 +14,11 @@ pip install   --break-system-packages -r  requirements.txt
 python run.py
 ```
 
-端口：8080
+`端口：8080`
+
+### 访问 swagger
+
+```shell
+#浏览器输入一下地址，访问 swagger页面
+http://127.0.0.1:8080/apidocs
+```
