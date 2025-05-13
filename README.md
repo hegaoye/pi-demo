@@ -38,7 +38,6 @@ apt-get install supervisor
 命名规则：app_name.conf
 
 [program:studio]
-process_name=%(program_name)s  ; 默认为 %(program_name)s，即 [program:x] 中的 x
 autorestart=true               ; 程序异常退出后自动重启              
 autostart=true                 ; 在 supervisord 启动的时候也自动启动
 numprocs=1                     ; 默认为1
