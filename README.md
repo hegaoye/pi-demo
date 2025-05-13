@@ -37,19 +37,19 @@ apt-get install supervisor
 文件位置：/etc/supervisor/conf.d/
 命名规则：app_name.conf
 
-
-[program:app] ; 程序名称，在 supervisorctl 中通过这个值来对程序进行一系列的操作
-autorestart=True      ; 程序异常退出后自动重启
-autostart=True        ; 在 supervisord 启动的时候也自动启动
-redirect_stderr=True  ; 把 stderr 重定向到 stdout，默认 false
-environment=PATH="/home/app_env/bin"  ; 可以通过 environment 来添加需要的环境变量，一种常见的用法是使用指定的 virtualenv 环境
-command=python server.py  ; 启动命令，与手动在命令行启动的命令是一样的
-user=ubuntu           ; 用哪个用户启动
-directory=/home/app/  ; 程序的启动目录
-stdout_logfile_maxbytes = 20MB  ; stdout 日志文件大小，默认 50MB
-stdout_logfile_backups = 20     ; stdout 日志文件备份数
-; stdout 日志文件，需要注意当指定目录不存在时无法正常启动，所以需要手动创建目录（supervisord 会自动创建日志文件）
-stdout_logfile = /data/logs/usercenter_stdout.log
+[program:studio]
+process_name=%(program_name)s  ; 默认为 %(program_name)s，即 [program:x] 中的 x
+autorestart=true               ; 程序异常退出后自动重启              
+autostart=true                 ; 在 supervisord 启动的时候也自动启动
+numprocs=1                     ; 默认为1
+redirect_stderr=true           ; 重定向输出的日志
+command=python run.py          ; 启动命令 最好绝对路径
+user=root                      ; 使用 root 用户来启动该进程
+directory=/home/mynest         ; 程序的启动目录
+stdout_logfile_maxbytes = 20MB ; 日志最大大小
+stdout_logfile_backups = 20    ; 文件保存数量
+loglevel=info                  ; 日志级别
+stdout_logfile = /var/log/supervisor/flask_server.log ;日志保存文件名
 ```
 
 #### `supervisor` 操作指令
