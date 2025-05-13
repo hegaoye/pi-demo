@@ -35,7 +35,7 @@ apt-get install supervisor
 
 ```
 文件位置：/etc/supervisor/conf.d/
-命名规则：app_name.conf
+命名规则：<appname>.conf
 
 [program:studio]
 autorestart=true               ; 程序异常退出后自动重启              
