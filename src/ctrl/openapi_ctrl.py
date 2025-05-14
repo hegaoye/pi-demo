@@ -9,7 +9,7 @@ from src.driver.servo_driver import ServoDriver
 openapi = Blueprint('openapi', __name__)
 
 
-@openapi.route("/relay/<string:onoff>", methods=['GET'])
+@openapi.route("/relay/<int:gpio>/<string:onoff>", methods=['GET'])
 def relay(onoff="off", gpio=25):
     """
     继电器开关控制 API
@@ -40,12 +40,12 @@ def relay(onoff="off", gpio=25):
               description: 状态码
               default: "0000"
     """
-
-    if onoff == str(Status.On).lower():
-        RelayDriver(gpio).on()
+    relay = RelayDriver(gpio)
+    if onoff.__eq__(Status.On.value.lower()):
+        relay.on()
         info = "on"
-    elif onoff == str(Status.Off).lower():
-        RelayDriver(gpio).off()
+    elif onoff.__eq__(Status.Off.value.lower()):
+        relay.off()
         info = "off"
 
     return jsonify({"code": "0000", "info": "123"})
@@ -91,3 +91,9 @@ def servo(angle=0, gpio=12):
     sleep(0.5)
     servo.stop()
     return jsonify({"code": "0000", "info": "123"})
+
+
+if __name__ == '__main__':
+    print(Status.On)
+    print(Status.Off)
+    print("on".__eq__(Status.On.value.lower()))
