@@ -91,9 +91,3 @@ def servo(angle=0, gpio=12):
     sleep(0.5)
     servo.stop()
     return jsonify({"code": "0000", "info": "123"})
-
-
-if __name__ == '__main__':
-    print(Status.On)
-    print(Status.Off)
-    print("on".__eq__(Status.On.value.lower()))
