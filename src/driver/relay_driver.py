@@ -7,16 +7,16 @@ import RPi.GPIO as GPIO
 # 继电器控制类
 class RelayDriver(object):
     def __init__(self, pin):
-        self.pin = pin
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
+        GPIO.setup(pin, GPIO.OUT)
+        self.pin = pin
 
     def on(self):
         """
         开灯控制
         :return:
         """
-        GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.LOW)
 
     def off(self):
@@ -24,7 +24,6 @@ class RelayDriver(object):
         关灯控制
         :return:
         """
-        GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.HIGH)
 
 
