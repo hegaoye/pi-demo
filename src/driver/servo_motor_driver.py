@@ -1,76 +1,61 @@
 # coding=utf-8
-import atexit
-import time
-
+from time import sleep
 import RPi.GPIO as GPIO
 
 
-class ServoMotorDriver(object):
+class ServoDriver(object):
     """
     舵机驱动
     """
 
-    def __init__(self):
-        atexit.register(GPIO.cleanup)
+    def __init__(self, pin, total_angle=180):
         GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(13, GPIO.OUT)
-        self.p = GPIO.PWM(13, 50)
+        GPIO.setmode(GPIO.BCM)  # 设置引脚编号系统，BOARD指的是物理引脚命名方式
+        GPIO.setup(pin, GPIO.OUT)  # 设置引脚32为输出
+        self.total_angle = total_angle  # 总度数 默认180度
+        self.pwm = GPIO.PWM(pin, 50)  # 创建舵机pwm实例，并设置频率为50Hz
 
-    def openLock(self):
+    def angle(self, angle):
         """
-        开锁控制
-        0.5	-90
-        1.0	-45
-        1.5	0
-        2.0	45
-        2.5	90
+        根据输入参数类型修改占空比
+        高电平持续时间/ms	舵机旋转角度/°
+            0.5	          -90
+            1.0	          -45
+            1.5	          0
+            2.0	          45
+            2.5	          90
+        :param angle: 角度
         """
-        self.p.start(0)
-        time.sleep(0.02)
-        self.p.ChangeDutyCycle(2)
-        time.sleep(1)
-        self.p.ChangeDutyCycle(0)
-        atexit.register(GPIO.cleanup)
-        # time.sleep(0.2)
-        # time.sleep(1)
-        # self.lock()
+        self.pwm.ChangeDutyCycle(2.5 + angle * 10 / self.total_angle)
 
-    def lock(self):
+    def start(self):
         """
-        锁定锁控制
+        开始
         """
-        self.p.start(0)
-        time.sleep(0.02)
-        self.p.ChangeDutyCycle(15)
-        time.sleep(1)
-        self.p.ChangeDutyCycle(0)
-        time.sleep(0.2)
+        self.pwm.start(0)
 
-    # 根据输入参数类型修改占空比
-    def gs90_angle(self,angle):
+    def stop(self):
+        """
+        停止
+        """
+        self.pwm.stop()
 
-        if isinstance(angle, str):
-            if angle.upper() == 'STOP':
-                self.p.ChangeDutyCycle(0)
-            else:
-                print('Input invalid')
-        elif isinstance(angle, int) or isinstance(angle, float):
-            self.p.ChangeDutyCycle(2.5 + angle * 10 / 180)
+    def pause(self):
+        """
+        暂停，悬停
+        """
+        self.pwm.ChangeDutyCycle(0)
 
 
-if __name__ == "__main__":
-    lockSV = ServoMotorDriver()
-
-    while True:
-        for angle in range(0, 180, 45):
-            lockSV.gs90_angle(angle)
-            time.sleep(0.1)
-            lockSV.gs90_angle('stop')
-            time.sleep(0.5)
-
-        for angle in range(180, 0, -45):
-            lockSV.gs90_angle(angle)
-            time.sleep(0.1)
-            lockSV.gs90_angle('stop')
-            time.sleep(0.5)
+if __name__ == '__main__':
+    servo = ServoDriver(12)
+    servo.start()
+    servo.angle(0)
+    sleep(0.1)
+    servo.pause()
+    sleep(1)
+    servo.angle(90)
+    sleep(0.1)
+    servo.pause()
+    sleep(0.5)
+    servo.stop()

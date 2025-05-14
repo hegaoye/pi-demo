@@ -5,7 +5,6 @@ from time import sleep
 ctrlpin = 12  # 指定引脚，物理引脚编号32
 
 GPIO.setwarnings(False)
-
 GPIO.setmode(GPIO.BCM)  # 设置引脚编号系统，BOARD指的是物理引脚命名方式
 GPIO.setup(ctrlpin, GPIO.OUT)  # 设置引脚32为输出
 
@@ -27,14 +26,13 @@ def gs90_angle(angle):
 if __name__ == "__main__":
 
     while True:
-
         for angle in range(0, 270, 45):
             gs90_angle(angle)
             sleep(0.1)
             gs90_angle('stop')
             sleep(0.5)
 
-        for angle in range(270, 0, -45):
+        for angle in range(-45, 0, 270):
             gs90_angle(angle)
             sleep(0.1)
             gs90_angle('stop')
