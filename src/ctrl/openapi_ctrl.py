@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify
 
 from src.config.status_enum import Status
 from src.driver.relay_driver import RelayDriver
-from src.driver.servo_motor_driver import ServoDriver
+from src.driver.servo_driver import ServoDriver
 
 openapi = Blueprint('openapi', __name__)
 
