@@ -8,6 +8,7 @@ from src.ctrl.servo_resource import ServoResource
 # 声明 flask 实例
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
 # 集成 swagger
 Swagger(app)
 
