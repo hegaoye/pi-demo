@@ -47,4 +47,4 @@ class RelayResource(Resource):
             relay.off()
             info = "off"
 
-        return {"code": "0000", "info": "123"}
+        return {"code": "0000", "info": info}
