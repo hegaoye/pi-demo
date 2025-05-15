@@ -2,8 +2,8 @@ from flasgger import Swagger
 from flask import Flask
 from flask_restful import Api
 
-from src.ctrl.relay_resource import RelayResource
-from src.ctrl.servo_resource import ServoResource
+from src.resource.relay_resource import RelayResource
+from src.resource.servo_resource import ServoResource
 
 # 声明 flask 实例
 app = Flask(__name__)
