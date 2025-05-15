@@ -1,4 +1,3 @@
-from flask import jsonify
 from flask_restful import Resource
 
 from src.config.status_enum import Status
@@ -48,4 +47,4 @@ class RelayResource(Resource):
             relay.off()
             info = "off"
 
-        return jsonify({"code": "0000", "info": "123"})
+        return {"code": "0000", "info": "123"}

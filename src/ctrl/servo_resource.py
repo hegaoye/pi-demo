@@ -1,6 +1,5 @@
 from time import sleep
 
-from flask import jsonify
 from flask_restful import Resource
 
 from src.driver.servo_driver import ServoDriver
@@ -49,4 +48,4 @@ class ServoResource(Resource):
         servo.pause()
         sleep(0.5)
         servo.stop()
-        return jsonify({"code": "0000", "info": "123"})
+        return {"code": "0000", "info": "123"}
