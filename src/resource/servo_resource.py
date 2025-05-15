@@ -48,4 +48,4 @@ class ServoResource(Resource):
         servo.pause()
         sleep(0.5)
         servo.stop()
-        return {"code": "0000", "info": "123"}
+        return {"code": "0000"}
