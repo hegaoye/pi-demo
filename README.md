@@ -1,4 +1,8 @@
 # 使用说明
+### 框架使用说明
+项目采用 flask + flasgger 实现 restful接口以及 swagger支持
+参考文档如下：
+https://flask-restfull.readthedocs.io/zh-cn/latest/first.html
 
 ### 安装依赖包
 
