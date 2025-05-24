@@ -26,10 +26,8 @@ class ServoDriver(object):
             2.5	          90
         :param angle: 角度
         """
-        # 2.5 = 0
-        # 2.5+5=90
-        # 2.5+12.5=180
-
+        # 角度控制脉冲范围 2ms ~ 13ms 180度 经验值 2.5ms 或 2.8ms 为 0度，13为180度
+        # 脉冲公式= 2.5ms + 角度 * 10 / 总度数
         self.pwm.ChangeDutyCycle(2.5 + angle * 10 / self.total_angle)
         # 关键的休眠
         sleep(1)
