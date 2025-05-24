@@ -31,6 +31,7 @@ class ServoDriver(object):
         # 2.5+12.5=180
 
         self.pwm.ChangeDutyCycle(2.5 + angle * 10 / self.total_angle)
+        # 关键的休眠
         sleep(1)
 
     def start(self):
