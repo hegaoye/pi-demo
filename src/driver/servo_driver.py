@@ -29,7 +29,7 @@ class ServoDriver(object):
         # 角度控制脉冲范围 2ms ~ 13ms 180度 经验值 2.5ms 或 2.8ms 为 0度，13为180度
         # 脉冲公式= 2.5ms + 角度 * 10 / 总度数
         self.pwm.ChangeDutyCycle(2.5 + angle * 10 / self.total_angle)
-        # 关键的休眠
+        # 关键的休眠 1s 充分执行
         sleep(1)
 
     def start(self):
