@@ -14,7 +14,7 @@ Swagger(app)
 
 # 注册接口
 api = Api(app)
-api.add_resource(ServoResource, '/servo/<int:gpio>/<int:angle>', endpoint='servo')
+api.add_resource(ServoResource, '/servo/<int:gpio>/<int:angle>/<int:total_angle>', endpoint='servo')
 api.add_resource(RelayResource, '/relay/<int:gpio>/<string:onoff>', endpoint='relay')
 
 if __name__ == "__main__":

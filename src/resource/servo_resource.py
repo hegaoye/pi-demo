@@ -10,7 +10,7 @@ class ServoResource(Resource):
     舵机旋转角度控制
     """
 
-    def get(self, angle=0, gpio=12):
+    def get(self, angle=0, total_angle=180, gpio=12):
         """
         舵机旋转角度控制 API
         ---
@@ -27,6 +27,11 @@ class ServoResource(Resource):
             type:  integer
             required: true
             description: 度数为整数 0,45,90,180,-45,-90,-180
+          - name: total_angle
+            in: path
+            type:  integer
+            required: true
+            description: 度数为整数 180,270,360
         responses:
           500:
             description: 度数错误
@@ -41,7 +46,7 @@ class ServoResource(Resource):
                   default: "0000"
         """
 
-        servo = ServoDriver(gpio)
+        servo = ServoDriver(gpio, total_angle=total_angle)
         servo.start()
         servo.angle(angle)
         sleep(0.1)
