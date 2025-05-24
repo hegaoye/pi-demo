@@ -49,7 +49,6 @@ class ServoResource(Resource):
         servo = ServoDriver(gpio, total_angle=total_angle)
         servo.start()
         servo.angle(angle)
-        sleep(0.1)
         servo.pause()
         sleep(0.5)
         servo.stop()

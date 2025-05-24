@@ -26,7 +26,12 @@ class ServoDriver(object):
             2.5	          90
         :param angle: 角度
         """
+        # 2.5 = 0
+        # 2.5+5=90
+        # 2.5+12.5=180
+
         self.pwm.ChangeDutyCycle(2.5 + angle * 10 / self.total_angle)
+        sleep(1)
 
     def start(self):
         """
@@ -51,11 +56,11 @@ if __name__ == '__main__':
     servo = ServoDriver(12)
     servo.start()
     servo.angle(0)
-    sleep(0.1)
+    sleep(1)
     servo.pause()
     sleep(1)
     servo.angle(90)
-    sleep(0.1)
+    sleep(1)
     servo.pause()
     sleep(0.5)
     servo.stop()
