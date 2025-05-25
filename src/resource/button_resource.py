@@ -1,4 +1,4 @@
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 
 
 class ButtonResource(Resource):
@@ -6,7 +6,7 @@ class ButtonResource(Resource):
     机械开关控制
     """
 
-    def get(self, callback, gpio=26):
+    def get(self, gpio=26):
         """
         机械开关控制 API
         ---
@@ -36,5 +36,7 @@ class ButtonResource(Resource):
                   description: 状态码
                   default: "0000"
         """
-
+        parse = reqparse.RequestParse()
+        args = parse.parse_args()
+        callback = args.get('callback')
         return {"code": "0000", "info": callback}
