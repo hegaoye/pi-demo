@@ -11,7 +11,7 @@ class ButtonResource(Resource):
         机械开关控制 API
         ---
         tags:
-          - 继电器开关控制 API
+          - 机械开关控制 API
         parameters:
           - name: gpio
             in: path
