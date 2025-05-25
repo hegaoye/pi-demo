@@ -1,4 +1,5 @@
-from flask_restful import Resource, reqparse
+from flask import request
+from flask_restful import Resource
 
 
 class ButtonResource(Resource):
@@ -36,7 +37,5 @@ class ButtonResource(Resource):
                   description: 状态码
                   default: "0000"
         """
-        parse = reqparse.RequestParse()
-        args = parse.parse_args()
-        callback = args.get('callback')
+        callback = request.args.get("callback")
         return {"code": "0000", "info": callback}
