@@ -1,6 +1,8 @@
 from flask import request
 from flask_restful import Resource
 
+from src.driver.button_driver import ButtonDriver
+
 
 class ButtonResource(Resource):
     """
@@ -38,4 +40,11 @@ class ButtonResource(Resource):
                   default: "0000"
         """
         callback = request.args.get("callback")
+
+        button_driver = ButtonDriver(gpio, callback)
+        button_driver.read()
         return {"code": "0000", "info": callback}
+
+
+def callback():
+    pass
