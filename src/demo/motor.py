@@ -17,32 +17,32 @@ in2_pwm.start(0)
 
 
 def forward(pwm=50):
-    in1_pwm.start(pwm)
-    in2_pwm.start(0)
+    in1_pwm.ChangeDutyCycle(pwm)
+    in2_pwm.ChangeDutyCycle(0)
     # GPIO.output(IN1, GPIO.HIGH)
     # GPIO.output(IN2, GPIO.LOW)
 
 
 def reverse(pwm=50):
-    in1_pwm.start(0)
-    in2_pwm.start(pwm)
+    in1_pwm.ChangeDutyCycle(0)
+    in2_pwm.ChangeDutyCycle(pwm)
     # GPIO.output(IN1, GPIO.LOW)
     # GPIO.output(IN2, GPIO.HIGH)
 
 
 def stop():
-    in1_pwm.start(0)
-    in2_pwm.start(0)
+    in1_pwm.stop()
+    in2_pwm.stop()
     # GPIO.output(IN1, False)
     # GPIO.output(IN2, False)
 
 
 if __name__ == '__main__':
-    for pwm in range(30, 100):
+    for pwm in range(35, 100):
         forward(pwm)
         sleep(.1)
 
-    for pwm in range(30, 100):
+    for pwm in range(35, 100):
         reverse(pwm)
         sleep(.1)
 
