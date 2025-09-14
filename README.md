@@ -41,14 +41,14 @@ apt-get install supervisor
 文件位置：/etc/supervisor/conf.d/
 命名规则：<appname>.conf
 
-[program:studio]
+[program:robot]
 autorestart=true               ; 程序异常退出后自动重启              
 autostart=true                 ; 在 supervisord 启动的时候也自动启动
 numprocs=1                     ; 默认为1
 redirect_stderr=true           ; 重定向输出的日志
 command=python run.py          ; 启动命令 最好绝对路径
 user=root                      ; 使用 root 用户来启动该进程
-directory=/home/mynest         ; 程序的启动目录
+directory=/home/robot         ; 程序的启动目录
 stdout_logfile_maxbytes = 20MB ; 日志最大大小
 stdout_logfile_backups = 20    ; 文件保存数量
 loglevel=info                  ; 日志级别
