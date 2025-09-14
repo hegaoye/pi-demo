@@ -14,8 +14,8 @@ class MotorDriver(object):
         GPIO.setmode(GPIO.BCM)  # 设置引脚编号系统，BOARD指的是物理引脚命名方式
         GPIO.setup(pin1, GPIO.OUT)  # 设置引脚
         GPIO.setup(pin2, GPIO.OUT)  # 设置引脚
-        self.pwm1 = GPIO.PWM(pin1, 50)  # 创建舵机pwm实例，并设置频率为50Hz
-        self.pwm2 = GPIO.PWM(pin2, 50)  # 创建舵机pwm实例，并设置频率为50Hz
+        self.pwm1 = GPIO.PWM(pin1, 50)  # 创建电机pwm实例，并设置频率为50Hz
+        self.pwm2 = GPIO.PWM(pin2, 50)  # 创建电机pwm实例，并设置频率为50Hz
 
     def start(self):
         """
