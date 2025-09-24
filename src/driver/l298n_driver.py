@@ -3,15 +3,22 @@ from time import sleep
 
 import RPi.GPIO as GPIO
 
+ENA = 15
+IN1 = 4
+IN2 = 14
+
+ENB = 24
+IN3 = 22
+IN4 = 23
 
 class L298NMotorDriver(object):
     """
     直流电机驱动器驱动
     """
 
-    def __init__(self, ena_pin, in1_pin, in2_pin, enb_pin, in3_pin, in4_pin):
+    def __init__(self, ena_pin=ENA, in1_pin=IN1, in2_pin=IN2, enb_pin=ENB, in3_pin=IN3, in4_pin=IN4):
         GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)  # 设置引脚编号系统，BOARD指的是物理引脚命名方式
+        GPIO.setmode(GPIO.BCM)
 
         # ENA
         GPIO.setup(ena_pin, GPIO.OUT)  # 设置引脚
@@ -23,8 +30,8 @@ class L298NMotorDriver(object):
         GPIO.setup(in3_pin, GPIO.OUT)  # 设置引脚
         GPIO.setup(in4_pin, GPIO.OUT)  # 设置引脚
 
-        self.ena_pin = GPIO.PWM(ena_pin, 100)  # 创建电机pwm实例，并设置频率为100Hz
-        self.enb_pin = GPIO.PWM(enb_pin, 100)  # 创建电机pwm实例，并设置频率为100Hz
+        self.ena_pin = GPIO.PWM(ena_pin, 50)  # 创建电机pwm实例，并设置频率为100Hz
+        self.enb_pin = GPIO.PWM(enb_pin, 50)  # 创建电机pwm实例，并设置频率为100Hz
 
         self.in1_pin = in1_pin
         self.in2_pin = in2_pin
@@ -53,6 +60,7 @@ class L298NMotorDriver(object):
         GPIO.output(self.in2_pin, False)
         GPIO.output(self.in3_pin, False)
         GPIO.output(self.in4_pin, False)
+        sleep(10)
 
     def forward(self, pwm):
         """
@@ -106,16 +114,8 @@ class L298NMotorDriver(object):
         GPIO.output(self.in3_pin, GPIO.LOW)
         GPIO.output(self.in4_pin, GPIO.HIGH)
 
-
 if __name__ == '__main__':
-    ENA = 15
-    IN1 = 4
-    IN2 = 14
-
-    ENB = 24
-    IN3 = 22
-    IN4 = 23
-    l298n_motor = L298NMotorDriver(ENA, IN1, IN2, ENB, IN3, IN4)
+    l298n_motor = L298NMotorDriver()
     l298n_motor.start()
     l298n_motor.forward(100)
     sleep(10)

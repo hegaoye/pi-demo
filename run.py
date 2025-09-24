@@ -15,10 +15,10 @@ Swagger(app)
 
 # 注册接口
 api = Api(app)
+api.add_resource(ChassisResource, '/robot', endpoint='chassis')
 api.add_resource(ServoResource, '/servo/<int:gpio>/<int:angle>/<int:total_angle>', endpoint='servo')
 api.add_resource(RelayResource, '/relay/<int:gpio>/<string:onoff>', endpoint='relay')
 # api.add_resource(ButtonResource, '/button/<int:gpio>', endpoint='button')
-api.add_resource(ChassisResource, '/robot', endpoint='chassis')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)

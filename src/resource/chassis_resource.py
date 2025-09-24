@@ -1,7 +1,8 @@
+from time import sleep
+
 from flask_restful import Resource
 
 from src.driver.l298n_driver import L298NMotorDriver
-
 
 class ChassisResource(Resource):
     """
@@ -38,25 +39,19 @@ class ChassisResource(Resource):
                   description: 状态码
                   default: "0000"
         """
-
-        ENA = 15
-        IN1 = 4
-        IN2 = 14
-
-        ENB = 24
-        IN3 = 22
-        IN4 = 23
-        l298n_motor = L298NMotorDriver(ENA, IN1, IN2, ENB, IN3, IN4)
+        l298n_motor = L298NMotorDriver()
         l298n_motor.start()
-        if direction.__eq__('forward'):
-            l298n_motor.forward(speed)
-        elif direction.__eq__('reverse'):
-            l298n_motor.reverse(speed)
-        elif direction.__eq__('turn_left'):
-            l298n_motor.turn_left(speed)
-        elif direction.__eq__('turn_right'):
-            l298n_motor.turn_right(speed)
-        else:
-            l298n_motor.stop()
-
+        # if direction.__eq__('forward'):
+        l298n_motor.forward(speed)
+        # elif direction.__eq__('reverse'):
+        # l298n_motor.reverse(speed)
+        # sleep(10)
+        # # elif direction.__eq__('turn_left'):
+        # l298n_motor.turn_left(speed)
+        # sleep(10)
+        # # elif direction.__eq__('turn_right'):
+        # l298n_motor.turn_right(speed)
+        # sleep(10)
+        # else:
+        # l298n_motor.stop()
         return {"code": "0000"}
