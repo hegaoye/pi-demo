@@ -4,6 +4,7 @@ from flask_restful import Resource
 
 from src.driver.l298n_driver import L298NMotorDriver
 
+
 class ChassisResource(Resource):
     """
     底盘控制
@@ -17,12 +18,12 @@ class ChassisResource(Resource):
           - 底盘控制 API
         parameters:
           - name: direction
-            in: parameter
+            in: path
             type:  string
             required: true
             description: 方向：前进 forward,后退 reverse，左转 turn_left，右转 turn_right;默认 forward
           - name: speed
-            in: parameter
+            in: path
             type:  integer
             required: true
             description: 速度，0~100，默认 0
@@ -41,17 +42,18 @@ class ChassisResource(Resource):
         """
         l298n_motor = L298NMotorDriver()
         l298n_motor.start()
-        # if direction.__eq__('forward'):
-        l298n_motor.forward(speed)
-        # elif direction.__eq__('reverse'):
-        # l298n_motor.reverse(speed)
-        # sleep(10)
-        # # elif direction.__eq__('turn_left'):
-        # l298n_motor.turn_left(speed)
-        # sleep(10)
-        # # elif direction.__eq__('turn_right'):
-        # l298n_motor.turn_right(speed)
-        # sleep(10)
-        # else:
-        # l298n_motor.stop()
+        if direction.__eq__('forward'):
+            l298n_motor.forward(speed)
+        elif direction.__eq__('reverse'):
+            l298n_motor.reverse(speed)
+            sleep(10)
+        elif direction.__eq__('turn_left'):
+            l298n_motor.turn_left(speed)
+            sleep(10)
+        elif direction.__eq__('turn_right'):
+            l298n_motor.turn_right(speed)
+            sleep(10)
+        else:
+            l298n_motor.stop()
+
         return {"code": "0000"}

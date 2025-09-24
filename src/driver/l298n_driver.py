@@ -60,7 +60,6 @@ class L298NMotorDriver(object):
         GPIO.output(self.in2_pin, False)
         GPIO.output(self.in3_pin, False)
         GPIO.output(self.in4_pin, False)
-        sleep(10)
 
     def forward(self, pwm):
         """
