@@ -1,19 +1,6 @@
-from time import sleep
-
 from flask_restful import Resource
 
-from src.driver.l298n_driver import L298NMotorDriver
-
-# 全局电机实例，用于持续控制
-l298n_motor = None
-
-
-def get_motor_instance():
-    global l298n_motor
-    if l298n_motor is None:
-        l298n_motor = L298NMotorDriver()
-        l298n_motor.start()
-    return l298n_motor
+from src.driver.l298n_driver import get_motor_instance
 
 
 class ChassisResource(Resource):
@@ -32,7 +19,7 @@ class ChassisResource(Resource):
             in: path
             type:  string
             required: true
-            description: 方向：前进 forward,后退 reverse，左转 turn_left，右转 turn_right;默认 forward
+            description: 方向：前进 forward , 后退 reverse , 左转 turn_left , 右转 turn_right , 停止 stop
           - name: speed
             in: path
             type:  integer
@@ -60,7 +47,7 @@ class ChassisResource(Resource):
             l298n_motor.turn_left(speed)
         elif direction.__eq__('turn_right'):
             l298n_motor.turn_right(speed)
-        else:
+        elif direction.__eq__('stop'):
             l298n_motor.pause()
 
         return {"code": "0000"}

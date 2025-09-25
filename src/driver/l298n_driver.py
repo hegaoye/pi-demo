@@ -11,6 +11,21 @@ ENB = 24
 IN3 = 22
 IN4 = 23
 
+# 全局电机实例，用于持续控制
+l298n_motor = None
+
+
+def get_motor_instance():
+    """
+    实现单例模式
+    """
+    global l298n_motor
+    if l298n_motor is None:
+        l298n_motor = L298NMotorDriver()
+        l298n_motor.start()
+    return l298n_motor
+
+
 class L298NMotorDriver(object):
     """
     直流电机驱动器驱动
@@ -120,6 +135,7 @@ class L298NMotorDriver(object):
         self.enb_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in3_pin, GPIO.LOW)
         GPIO.output(self.in4_pin, GPIO.HIGH)
+
 
 if __name__ == '__main__':
     l298n_motor = L298NMotorDriver()
