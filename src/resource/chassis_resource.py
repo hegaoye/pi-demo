@@ -19,7 +19,7 @@ class ChassisResource(Resource):
             in: path
             type:  string
             required: true
-            description: 方向：前进 forward , 后退 reverse , 左转 turn_left , 右转 turn_right , 停止 stop
+            description: 方向：前进 forward , 后退 reverse , 左转 turn_left , 右转 turn_right , 开始 start , 暂停 pause, 停止 stop
           - name: speed
             in: path
             type:  integer
@@ -47,7 +47,11 @@ class ChassisResource(Resource):
             l298n_motor.turn_left(speed)
         elif direction.__eq__('turn_right'):
             l298n_motor.turn_right(speed)
-        elif direction.__eq__('stop'):
+        elif direction.__eq__('start'):
+            l298n_motor.start()
+        elif direction.__eq__('pause'):
             l298n_motor.pause()
+        elif direction.__eq__('stop'):
+            l298n_motor.stop()
 
         return {"code": "0000"}
