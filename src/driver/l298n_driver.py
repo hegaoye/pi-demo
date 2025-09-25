@@ -30,8 +30,8 @@ class L298NMotorDriver(object):
         GPIO.setup(in3_pin, GPIO.OUT)  # 设置引脚
         GPIO.setup(in4_pin, GPIO.OUT)  # 设置引脚
 
-        self.ena_pin = GPIO.PWM(ena_pin, 50)  # 创建电机pwm实例，并设置频率为100Hz
-        self.enb_pin = GPIO.PWM(enb_pin, 50)  # 创建电机pwm实例，并设置频率为100Hz
+        self.ena_pin = GPIO.PWM(ena_pin, 100)  # 创建电机pwm实例，并设置频率为100Hz
+        self.enb_pin = GPIO.PWM(enb_pin, 100)  # 创建电机pwm实例，并设置频率为100Hz
 
         self.in1_pin = in1_pin
         self.in2_pin = in2_pin
@@ -45,6 +45,14 @@ class L298NMotorDriver(object):
         # 默认设置0频率
         self.ena_pin.start(0)
         self.enb_pin.start(0)
+        GPIO.output(self.in1_pin, GPIO.LOW)
+        GPIO.output(self.in2_pin, GPIO.LOW)
+        GPIO.output(self.in3_pin, GPIO.LOW)
+        GPIO.output(self.in4_pin, GPIO.LOW)
+
+    def pause(self):
+        self.ena_pin.ChangeDutyCycle(0)
+        self.enb_pin.ChangeDutyCycle(0)
         GPIO.output(self.in1_pin, GPIO.LOW)
         GPIO.output(self.in2_pin, GPIO.LOW)
         GPIO.output(self.in3_pin, GPIO.LOW)
