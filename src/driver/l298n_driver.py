@@ -3,9 +3,9 @@ from time import sleep
 
 import RPi.GPIO as GPIO
 
-ENA = 15
-IN1 = 4
-IN2 = 14
+ENA = 5
+IN1 = 6
+IN2 = 13
 
 ENB = 24
 IN3 = 22
@@ -140,12 +140,12 @@ class L298NMotorDriver(object):
 if __name__ == '__main__':
     l298n_motor = L298NMotorDriver()
     l298n_motor.start()
-    l298n_motor.forward(100)
+    l298n_motor.forward(50)
     sleep(10)
-    l298n_motor.reverse(100)
+    l298n_motor.reverse(50)
     sleep(10)
-    l298n_motor.turn_left(100)
+    l298n_motor.turn_left(50)
     sleep(10)
-    l298n_motor.turn_right(100)
+    l298n_motor.turn_right(50)
     sleep(10)
     l298n_motor.stop()
