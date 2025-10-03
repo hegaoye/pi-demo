@@ -40,9 +40,11 @@ class ChassisResource(Resource):
         """
         ws2412d_motor = get_motor_instance()
         if direction.__eq__('forward'):
+            ws2412d_motor.pause()
             ws2412d_motor.forward()
             ws2412d_motor.speed(speed, speed)
         elif direction.__eq__('reverse'):
+            ws2412d_motor.pause()
             ws2412d_motor.reverse()
             ws2412d_motor.speed(speed, speed)
         elif direction.__eq__('turn_left'):
