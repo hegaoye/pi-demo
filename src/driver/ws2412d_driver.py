@@ -12,21 +12,21 @@ IN3 = 22
 IN4 = 23
 
 # 全局电机实例，用于持续控制
-l298n_motor = None
+ws2412d_motor = None
 
 
 def get_motor_instance():
     """
     实现单例模式
     """
-    global l298n_motor
-    if l298n_motor is None:
-        l298n_motor = L298NMotorDriver()
-        l298n_motor.start()
-    return l298n_motor
+    global ws2412d_motor
+    if ws2412d_motor is None:
+        ws2412d_motor = WS2412DMotorDriver()
+        ws2412d_motor.start()
+    return ws2412d_motor
 
 
-class L298NMotorDriver(object):
+class WS2412DMotorDriver(object):
     """
     直流电机驱动器驱动
     """
@@ -138,14 +138,14 @@ class L298NMotorDriver(object):
 
 
 if __name__ == '__main__':
-    l298n_motor = L298NMotorDriver()
-    l298n_motor.start()
-    l298n_motor.forward(50)
+    ws2412d_motor = WS2412DMotorDriver()
+    ws2412d_motor.start()
+    ws2412d_motor.forward(50)
     sleep(10)
-    l298n_motor.reverse(50)
+    ws2412d_motor.reverse(50)
     sleep(10)
-    l298n_motor.turn_left(50)
+    ws2412d_motor.turn_left(50)
     sleep(10)
-    l298n_motor.turn_right(50)
+    ws2412d_motor.turn_right(50)
     sleep(10)
-    l298n_motor.stop()
+    ws2412d_motor.stop()

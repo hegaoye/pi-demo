@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from src.driver.l298n_driver import get_motor_instance
+from src.driver.ws2412d_driver import get_motor_instance
 
 
 class ChassisResource(Resource):
