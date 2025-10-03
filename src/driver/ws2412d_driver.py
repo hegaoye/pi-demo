@@ -66,6 +66,9 @@ class WS2412DMotorDriver(object):
         GPIO.output(self.in4_pin, GPIO.LOW)
 
     def pause(self):
+        """
+        暂停
+        """
         self.ena_pin.ChangeDutyCycle(0)
         self.enb_pin.ChangeDutyCycle(0)
         GPIO.output(self.in1_pin, GPIO.LOW)
@@ -84,55 +87,55 @@ class WS2412DMotorDriver(object):
         GPIO.output(self.in3_pin, False)
         GPIO.output(self.in4_pin, False)
 
-    def forward(self, pwm):
+    def speed(self, pwm_left, pwm_right):
+        """
+        pwm_left: 左转
+        pwm_right: 右转
+        """
+        self.ena_pin.ChangeDutyCycle(pwm_left)
+        self.enb_pin.ChangeDutyCycle(pwm_right)
+
+    def forward(self):
         """
         正转，pwm 控制速度
         """
         # ENA
-        self.ena_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in1_pin, GPIO.HIGH)
         GPIO.output(self.in2_pin, GPIO.LOW)
         # ENB
-        self.enb_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in3_pin, GPIO.HIGH)
         GPIO.output(self.in4_pin, GPIO.LOW)
 
-    def reverse(self, pwm):
+    def reverse(self):
         """
         反转，pwm 控制速度
         """
         # ENA
-        self.ena_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in1_pin, GPIO.LOW)
         GPIO.output(self.in2_pin, GPIO.HIGH)
         # ENB
-        self.enb_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in3_pin, GPIO.LOW)
         GPIO.output(self.in4_pin, GPIO.HIGH)
 
-    def turn_left(self, pwm):
+    def turn_left(self):
         """
         左转
         """
         # ENA
-        self.ena_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in1_pin, GPIO.LOW)
         GPIO.output(self.in2_pin, GPIO.HIGH)
         # ENB
-        self.enb_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in3_pin, GPIO.HIGH)
         GPIO.output(self.in4_pin, GPIO.LOW)
 
-    def turn_right(self, pwm):
+    def turn_right(self):
         """
         右转
         """
         # ENA
-        self.ena_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in1_pin, GPIO.HIGH)
         GPIO.output(self.in2_pin, GPIO.LOW)
         # ENB
-        self.enb_pin.ChangeDutyCycle(pwm)
         GPIO.output(self.in3_pin, GPIO.LOW)
         GPIO.output(self.in4_pin, GPIO.HIGH)
 
@@ -140,12 +143,16 @@ class WS2412DMotorDriver(object):
 if __name__ == '__main__':
     ws2412d_motor = WS2412DMotorDriver()
     ws2412d_motor.start()
-    ws2412d_motor.forward(50)
+    ws2412d_motor.forward()
+    ws2412d_motor.speed(50, 50)
     sleep(10)
-    ws2412d_motor.reverse(50)
+    ws2412d_motor.reverse()
+    ws2412d_motor.speed(50, 50)
     sleep(10)
-    ws2412d_motor.turn_left(50)
+    ws2412d_motor.turn_left()
+    ws2412d_motor.speed(50, 50)
     sleep(10)
-    ws2412d_motor.turn_right(50)
+    ws2412d_motor.turn_right()
+    ws2412d_motor.speed(50, 50)
     sleep(10)
     ws2412d_motor.stop()

@@ -38,20 +38,24 @@ class ChassisResource(Resource):
                   description: 状态码
                   default: "0000"
         """
-        l298n_motor = get_motor_instance()
+        ws2412d_motor = get_motor_instance()
         if direction.__eq__('forward'):
-            l298n_motor.forward(speed)
+            ws2412d_motor.forward()
+            ws2412d_motor.speed(speed, speed)
         elif direction.__eq__('reverse'):
-            l298n_motor.reverse(speed)
+            ws2412d_motor.reverse()
+            ws2412d_motor.speed(speed, speed)
         elif direction.__eq__('turn_left'):
-            l298n_motor.turn_left(speed)
+            ws2412d_motor.turn_left()
+            ws2412d_motor.speed(speed, speed)
         elif direction.__eq__('turn_right'):
-            l298n_motor.turn_right(speed)
+            ws2412d_motor.turn_right()
+            ws2412d_motor.speed(speed, speed)
         elif direction.__eq__('start'):
-            l298n_motor.start()
+            ws2412d_motor.start()
         elif direction.__eq__('pause'):
-            l298n_motor.pause()
+            ws2412d_motor.pause()
         elif direction.__eq__('stop'):
-            l298n_motor.stop()
+            ws2412d_motor.stop()
 
         return {"code": "0000"}
