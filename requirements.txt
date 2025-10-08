@@ -1,3 +1,6 @@
 Flask~=3.1.0
 Flask-RESTful~=0.3.10
+Flask-SocketIO~=5.3.6
 flasgger~=0.9.7.1
+python-socketio~=5.9.0
+python-engineio~=4.7.1
