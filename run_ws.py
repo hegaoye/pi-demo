@@ -3,6 +3,7 @@ import logging
 from flask import Flask
 from flask_socketio import SocketIO, emit
 
+from src.driver.ws2412d_driver import get_motor_instance
 from src.resource.chassis_resource import ChassisResource
 
 # 配置日志
