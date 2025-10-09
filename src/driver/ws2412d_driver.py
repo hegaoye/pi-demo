@@ -4,12 +4,12 @@ from time import sleep
 import RPi.GPIO as GPIO
 
 ENA = 5
-IN1 = 6
-IN2 = 13
+IN1 = 13
+IN2 = 6
 
-ENB = 24
-IN3 = 22
-IN4 = 23
+ENB = 10
+IN3 = 9
+IN4 = 11
 
 # 全局电机实例，用于持续控制
 ws2412d_motor = None
